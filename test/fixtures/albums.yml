@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  image_url: MyString
+  release_date: 2022-06-20 13:43:28
+  total_tracks: 1
+  artist: one
+
+two:
+  title: MyString
+  image_url: MyString
+  release_date: 2022-06-20 13:43:28
+  total_tracks: 1
+  artist: two
