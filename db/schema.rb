@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_21_010550) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_052615) do
   create_table "albums", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "image_url"
@@ -28,6 +28,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_010550) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "group_memberships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_memberships_on_group_id"
+    t.index ["member_id"], name: "index_group_memberships_on_member_id"
+  end
+
+  create_table "groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_groups_on_owner_id"
   end
 
   create_table "tracks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -51,6 +68,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_010550) do
   end
 
   add_foreign_key "albums", "artists"
+  add_foreign_key "group_memberships", "groups"
+  add_foreign_key "group_memberships", "users", column: "member_id"
+  add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "tracks", "albums"
   add_foreign_key "tracks", "artists"
 end
