@@ -5,24 +5,31 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-unless Rails.env.production?
-  connection = ActiveRecord::Base.connection
+# unless Rails.env.production?
+#   connection = ActiveRecord::Base.connection
 
-  sql = File.read('db/import.sql') # Change path and filename as necessary
-  statements = sql.split(/;$/)
-  statements.pop
+#   sql = File.read('db/import.sql') # Change path and filename as necessary
+#   statements = sql.split(/;$/)
+#   statements.pop
   
-  ActiveRecord::Base.transaction do
-    statements.each do |statement|
-      connection.execute(statement)
-    end
-  end
-end
+#   ActiveRecord::Base.transaction do
+#     statements.each do |statement|
+#       connection.execute(statement)
+#     end
+#   end
+# end
 
 
-# Vehicle.create!([
-#   { name: 'Tesla Model S', price: '51885.17', picture: 'https://static-assets.tesla.com/configurator/compositor?&options=$MT337,$PPSW,$W40B,$IBB1&view=STUD_FRONT34&model=m3&size=1920&bkba_opt=2&version=v0028d202109300916&crop=0,0,0,0&version=v0028d202109300916' },
-#   { name: 'Tesla Model 3', price: '100990', picture: 'https://static-assets.tesla.com/configurator/compositor?&options=$MTS10,$PPSW,$WS90,$IBE00&view=FRONT34&model=ms&size=1920&bkba_opt=2&version=v0028d202109300916&crop=0,0,0,0&version=v0028d202109300916' },
-#   { name: 'Tesla Model X', price: '120990', picture: 'https://static-assets.tesla.com/configurator/compositor?&options=$MTX10,$PPSW,$WX00,$IBE00&view=FRONT34&model=mx&size=1920&bkba_opt=2&version=v0028d202109300916&crop=0,0,0,0&version=v0028d202109300916' },
-#   { name: 'Tesla Model Y', price: '65000', picture: 'https://static-assets.tesla.com/configurator/compositor?&options=$MTY07,$PPSW,$WY19B,$INPB0&view=FRONT34&model=my&size=1920&bkba_opt=2&version=v0028d202109300916&crop=0,0,0,0&version=v0028d202109300916' }
-# ])
+User.create!([
+  { name: 'test1', email: 'test1@example.com', password: 'qwer1234' },
+  { name: 'test2', email: 'test2@example.com', password: 'qwer1234' },
+  { name: 'test3', email: 'test3@example.com', password: 'qwer1234' },
+  { name: 'test4', email: 'test4@example.com', password: 'qwer1234' },
+  { name: 'test5', email: 'test5@example.com', password: 'qwer1234' },
+  { name: 'test6', email: 'test6@example.com', password: 'qwer1234' },
+  { name: 'test7', email: 'test7@example.com', password: 'qwer1234' },
+  { name: 'test8', email: 'test8@example.com', password: 'qwer1234' },
+  { name: 'test9', email: 'test9@example.com', password: 'qwer1234' },
+  { name: 'test10', email: 'test10@example.com', password: 'qwer1234' },
+  { name: 'test11', email: 'test11@example.com', password: 'qwer1234' }
+])

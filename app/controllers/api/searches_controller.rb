@@ -1,5 +1,5 @@
-class SearchesController < ApplicationController
-  # before_action :check_params
+class Api::SearchesController < ApplicationController
+  before_action :check_params
   
   def index
     
@@ -11,10 +11,8 @@ class SearchesController < ApplicationController
 
   def check_params
     @query = params[:q]
-    @sort = params[:sort]
+    # @sort = params[:sort]
     @limit = params[:limit] || 10
     @offset = params[:offset] || 0
-    
-
   end
 end
