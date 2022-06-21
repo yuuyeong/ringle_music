@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-  get 'api/search', to: 'searches#index'
+  devise_for :users, path: "/api",
+              path_names: { sign_in: :login, sign_out: :logout, registration: :users },
+              controllers: {
+                sessions: 'users/sessions',
+                registrations: 'users/registrations'
+              }
 end

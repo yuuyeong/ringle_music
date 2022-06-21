@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_20_044402) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_21_010550) do
   create_table "albums", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "image_url"
@@ -30,35 +30,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_044402) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "song_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["song_id"], name: "index_likes_on_song_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
-  end
-
-  create_table "songs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tracks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "duration"
     t.bigint "artist_id", null: false
     t.bigint "album_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["album_id"], name: "index_songs_on_album_id"
-    t.index ["artist_id"], name: "index_songs_on_artist_id"
+    t.index ["album_id"], name: "index_tracks_on_album_id"
+    t.index ["artist_id"], name: "index_tracks_on_artist_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "display_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "name", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "jti"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["jti"], name: "index_users_on_jti", unique: true
   end
 
   add_foreign_key "albums", "artists"
-  add_foreign_key "likes", "songs"
-  add_foreign_key "likes", "users"
-  add_foreign_key "songs", "albums"
-  add_foreign_key "songs", "artists"
+  add_foreign_key "tracks", "albums"
+  add_foreign_key "tracks", "artists"
 end
