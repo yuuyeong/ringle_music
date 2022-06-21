@@ -1,12 +1,9 @@
 class SearchesController < ApplicationController
-  before_action :check_params
+  # before_action :check_params
   
   def index
-    puts @query
-    puts @sort
-    puts @limit
-    puts @offset
-    puts @search_type
+    
+
     render json: {msg: 'success'}
   end
 
@@ -17,8 +14,6 @@ class SearchesController < ApplicationController
     @sort = params[:sort]
     @limit = params[:limit] || 10
     @offset = params[:offset] || 0
-    # type : song artist album
-    @search_type = params[:type]
     
 
   end
