@@ -5,19 +5,19 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-# unless Rails.env.production?
-#   connection = ActiveRecord::Base.connection
+unless Rails.env.production?
+  connection = ActiveRecord::Base.connection
 
-#   sql = File.read('db/import.sql') # Change path and filename as necessary
-#   statements = sql.split(/;$/)
-#   statements.pop
+  sql = File.read('db/import.sql') # Change path and filename as necessary
+  statements = sql.split(/;$/)
+  statements.pop
   
-#   ActiveRecord::Base.transaction do
-#     statements.each do |statement|
-#       connection.execute(statement)
-#     end
-#   end
-# end
+  ActiveRecord::Base.transaction do
+    statements.each do |statement|
+      connection.execute(statement)
+    end
+  end
+end
 
 
 User.create!([
@@ -33,3 +33,16 @@ User.create!([
   { name: 'test10', email: 'test10@example.com', password: 'qwer1234' },
   { name: 'test11', email: 'test11@example.com', password: 'qwer1234' }
 ])
+
+Group.create!(name: 'test group', owner: User.first)
+
+GroupMembership.create!([
+  {group: Group.first, user: User.last},
+  {group: Group.first, user: User.find_by_id(8)}
+])
+
+Playlist.create!([
+  { name: '개인용', playlistable_type: 'User', playlistable_id: 1 },
+  { name: '그룹용', playlistable_type: 'Group', playlistable_id: 1 }
+])
+

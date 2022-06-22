@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :owned_groups, foreign_key: "owner_id", class_name: "Group"
   has_many :groups, through: :group_memberships
   has_many :group_memberships
+  has_one :playlist, as: :playlistable
   
   validates :email, :password, :name, presence: true, :on => :create
 end

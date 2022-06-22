@@ -9,5 +9,10 @@ Rails.application.routes.draw do
   namespace :api do
     resources :groups
     resources :group_memberships
+  
+    post '/playlists', to: 'playlist#create'
+    post '/playlists/:id/tracks', to: 'playlist_tracks#create'
+    delete '/playlists/:id/tracks', to: 'playlist_tracks#destroy'
+    
   end
 end
