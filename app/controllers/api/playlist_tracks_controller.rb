@@ -1,6 +1,6 @@
 class Api::PlaylistTracksController < ApplicationController
   before_action :authenticate_user!
-  before_action :validate_tracks_count, only: [:create, :delete]
+  before_action :validate_tracks_count, only: [:create, :destroy]
   before_action :find_playlist
   before_action :validate_playlist_creator
 

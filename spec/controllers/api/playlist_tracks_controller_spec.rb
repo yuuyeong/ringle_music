@@ -6,11 +6,11 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
     let(:artist) { create(:artist) }
     let(:album) { create(:album, artist: artist) }
     let(:tracks) { create_list(:track, 5, artist: artist, album: album) }
-    
-    subject { post "/api/playlists/#{playlist_for_group.playlistable.id}/tracks", params: params, headers: auth_headers } 
 
     context 'when playlist type is group' do
       let(:auth_headers) { authenticated_header(playlist_for_group.playlistable.owner) }
+
+      subject { post "/api/playlists/#{playlist_for_group.id}/tracks", params: params, headers: auth_headers } 
 
       context 'with valid params' do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
@@ -51,6 +51,8 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       let(:playlist_for_user) { create(:playlist, :for_user) }
       let(:auth_headers) { authenticated_header(playlist_for_user.playlistable) }
 
+      subject { post "/api/playlists/#{playlist_for_user.id}/tracks", params: params, headers: auth_headers } 
+
       context 'with valid params' do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
@@ -68,7 +70,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
-          subject
+          post "/api/playlists/0/tracks", params: params, headers: auth_headers
           expect(response).to have_http_status(:bad_request)
         end
       end
@@ -92,11 +94,10 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
     let(:album) { create(:album, artist: artist) }
     let(:tracks) { create_list(:track, 3, artist: artist, album: album) }
 
-    
-    subject { delete "/api/playlists/#{playlist_for_group.playlistable.id}/tracks", params: params, headers: auth_headers } 
-
     context 'when playlist type is group' do
       let(:auth_headers) { authenticated_header(playlist_for_group.playlistable.owner) }
+
+      subject { delete "/api/playlists/#{playlist_for_group.id}/tracks", params: params, headers: auth_headers } 
 
       context 'with valid params' do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
@@ -112,8 +113,10 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
           expect(response).to have_http_status(:ok)
         end
 
-        it 'creates 5 PlaylistTracks record' do
-          expect { subject }.to change(PlaylistTrack, :count).by(-3)
+        it 'deletes 3 PlaylistTracks record' do
+          subject
+          puts 
+          expect(playlist_for_group.playlist_tracks.reload).to eq([])
         end
       end
 
@@ -121,7 +124,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
-          subject
+          delete "/api/playlists/0/tracks", params: params, headers: auth_headers
           expect(response).to have_http_status(:bad_request)
         end
       end
@@ -141,6 +144,8 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
     context 'when playlist type is user' do
       let(:playlist_for_user) { create(:playlist, :for_user) }
       let(:auth_headers) { authenticated_header(playlist_for_user.playlistable) }
+
+      subject { delete "/api/playlists/#{playlist_for_user.id}/tracks", params: params, headers: auth_headers } 
 
       context 'with valid params' do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
@@ -165,7 +170,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
         let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
-          subject
+          delete "/api/playlists/0/tracks", params: params, headers: auth_headers
           expect(response).to have_http_status(:bad_request)
         end
       end
