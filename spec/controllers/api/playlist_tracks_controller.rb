@@ -13,7 +13,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       let(:auth_headers) { authenticated_header(playlist_for_group.playlistable.owner) }
 
       context 'with valid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_group.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 201' do
           subject
@@ -27,7 +27,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
 
       context 'with invalid params' do
         let(:tracks) { create_list(:track, 101, artist: artist, album: album) }
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: 0 } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
           subject
@@ -38,7 +38,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       context 'with unauthorized member' do
         let(:user) { create(:user) }
         let(:auth_headers) { authenticated_header(user) }
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_group.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 403' do
           subject
@@ -52,7 +52,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       let(:auth_headers) { authenticated_header(playlist_for_user.playlistable) }
 
       context 'with valid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_user.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 201' do
           subject
@@ -65,7 +65,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       end
 
       context 'with invalid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: 0 } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
           subject
@@ -76,7 +76,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       context 'with unauthorized member' do
         let(:user) { create(:user) }
         let(:auth_headers) { authenticated_header(user) }
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_user.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 403' do
           subject
@@ -99,7 +99,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       let(:auth_headers) { authenticated_header(playlist_for_group.playlistable.owner) }
 
       context 'with valid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_group.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         before :example do
           tracks.each do |track|
@@ -118,7 +118,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       end
 
       context 'with invalid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: 0 } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
           subject
@@ -129,7 +129,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       context 'with unauthorized member' do
         let(:user) { create(:user) }
         let(:auth_headers) { authenticated_header(user) }
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_group.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 403' do
           subject
@@ -143,7 +143,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       let(:auth_headers) { authenticated_header(playlist_for_user.playlistable) }
 
       context 'with valid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_user.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         before :example do
           tracks.each do |track|
@@ -162,7 +162,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       end
 
       context 'with invalid params' do
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: 0 } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 400' do
           subject
@@ -173,7 +173,7 @@ RSpec.describe "Api::PlaylistTracksController", type: :request do
       context 'with unauthorized member' do
         let(:user) { create(:user) }
         let(:auth_headers) { authenticated_header(user) }
-        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(','), playlist_id: playlist_for_user.id } }.to_json }
+        let(:params) { { playlist_track: { track_ids: tracks.map {|t| t.id}.join(',') } }.to_json }
 
         it 'returns status code 403' do
           subject

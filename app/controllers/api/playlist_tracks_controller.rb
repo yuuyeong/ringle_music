@@ -1,8 +1,14 @@
 class Api::PlaylistTracksController < ApplicationController
   before_action :authenticate_user!
-  before_action :validate_tracks_count
+  before_action :validate_tracks_count, only: [:create, :delete]
   before_action :find_playlist
   before_action :validate_playlist_creator
+
+  def index
+    track_list = @playlist.track_list
+
+    render json: { result: track_list }, status: :ok
+  end
 
   def create
     @playlist.playlist_tracks.insert_all!(@track_list.map { |track_id| { track_id: track_id } })
@@ -24,7 +30,7 @@ class Api::PlaylistTracksController < ApplicationController
   private
 
   def find_playlist
-    @playlist = Playlist.find_by(id: playlist_track_params[:playlist_id])
+    @playlist = Playlist.find_by(id: params[:id])
 
     render json: { message: "존재하지 않는 플레이리스트입니다." }, status: :bad_request if @playlist.nil?
   end
@@ -48,6 +54,6 @@ class Api::PlaylistTracksController < ApplicationController
   end
 
   def playlist_track_params
-    params.require(:playlist_track).permit(:track_ids, :playlist_id)
+    params.require(:playlist_track).permit(:track_ids)
   end
 end

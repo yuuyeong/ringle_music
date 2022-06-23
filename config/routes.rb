@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :groups, only: :create
     resources :group_memberships, only: :create
   
+    get '/search', to: 'search#index'
     post '/playlists', to: 'playlists#create'
+    get '/playlists/:id/tracks', to: 'playlist_tracks#index'
     post '/playlists/:id/tracks', to: 'playlist_tracks#create'
     delete '/playlists/:id/tracks', to: 'playlist_tracks#destroy'
     
