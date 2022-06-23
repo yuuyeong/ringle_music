@@ -2,8 +2,8 @@ class Api::GroupsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   
   # show current_users groups
-  def index
-  end
+  # def index
+  # end
 
   def create
     @group = Group.new(group_params.merge(owner: current_user))

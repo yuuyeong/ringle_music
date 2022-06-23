@@ -9,8 +9,6 @@ class Playlist < ApplicationRecord
   validates :playlistable_id, uniqueness: { scope: :playlistable_type }
   validates :name, :playlistable_id, :playlistable_type, presence: true
 
-  private
-
   def check_tracks_limit
     track_list_length = playlist_tracks.size
 
