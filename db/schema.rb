@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_22_005146) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_23_192959) do
   create_table "albums", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "image_url"
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_005146) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_groups_on_owner_id"
+  end
+
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "track_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "index_likes_on_track_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "playlist_tracks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -89,6 +98,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_005146) do
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
   add_foreign_key "groups", "users", column: "owner_id"
+  add_foreign_key "likes", "tracks"
+  add_foreign_key "likes", "users"
   add_foreign_key "playlist_tracks", "playlists"
   add_foreign_key "playlist_tracks", "tracks"
   add_foreign_key "tracks", "albums"
