@@ -2,7 +2,7 @@ class Api::PlaylistsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_playlist_creator
   before_action :validate_playlist_creator
-
+  
   def create
     @playlist = Playlist.new(playlistable: @creator, name: playlist_params[:name])
 

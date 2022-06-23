@@ -7,14 +7,10 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    puts "@@@@@@@@111111111111111"
-    puts current_user
     render json: resource.as_json(except: [:jti]), status: :ok
   end
 
   def respond_to_on_destroy
-    puts "@@@@@@@@222222222222222222"
-    puts current_user
     log_out_success && return if current_user
 
     log_out_failure
