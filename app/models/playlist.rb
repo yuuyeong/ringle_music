@@ -4,7 +4,7 @@ class Playlist < ApplicationRecord
   belongs_to :playlistable, polymorphic: true
 
   has_many :playlist_tracks, before_add: :check_tracks_limit
-  has_many :songs, through: :playlist_tracks, source: :track
+  has_many :track_list, through: :playlist_tracks, source: :track
 
   validates :playlistable_id, uniqueness: { scope: :playlistable_type }
   validates :name, :playlistable_id, :playlistable_type, presence: true
