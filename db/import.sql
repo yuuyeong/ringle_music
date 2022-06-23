@@ -47,3 +47,19 @@ insert into tracks (title, duration, artist_id, album_id, created_at, updated_at
 insert into tracks (title, duration, artist_id, album_id, created_at, updated_at) values('쌀밥', '3:35', 2, 5, current_timestamp(), current_timestamp());
 insert into tracks (title, duration, artist_id, album_id, created_at, updated_at) values('살결', '3:35', 2, 5, current_timestamp(), current_timestamp());
 insert into tracks (title, duration, artist_id, album_id, created_at, updated_at) values('오늘 같은 날', '3:35', 2, 5, current_timestamp(), current_timestamp());
+
+insert into likes (track_id, user_id, created_at, updated_at) values(1, 1, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(1, 3, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(1, 5, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(1, 7, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(1, 9, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(1, 11, current_timestamp(), current_timestamp());
+
+insert into likes (track_id, user_id, created_at, updated_at) values(12, 2, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(12, 4, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(12, 6, current_timestamp(), current_timestamp());
+insert into likes (track_id, user_id, created_at, updated_at) values(12, 8, current_timestamp(), current_timestamp());
+
+insert into likes (track_id, user_id, created_at, updated_at) values(6, 10, current_timestamp(), current_timestamp());
+
+insert into likes (track_id, user_id, created_at, updated_at) values(13, 3, current_timestamp(), current_timestamp());

@@ -5,20 +5,6 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-unless Rails.env.production?
-  connection = ActiveRecord::Base.connection
-
-  sql = File.read('db/import.sql') # Change path and filename as necessary
-  statements = sql.split(/;$/)
-  statements.pop
-  
-  ActiveRecord::Base.transaction do
-    statements.each do |statement|
-      connection.execute(statement)
-    end
-  end
-end
-
 
 User.create!([
   { name: 'test1', email: 'test1@example.com', password: 'qwer1234' },
@@ -46,3 +32,16 @@ Playlist.create!([
   { name: '그룹용', playlistable_type: 'Group', playlistable_id: 1 }
 ])
 
+if Rails.env.development?
+  connection = ActiveRecord::Base.connection
+
+  sql = File.read('db/import.sql') # Change path and filename as necessary
+  statements = sql.split(/;$/)
+  statements.pop
+  
+  ActiveRecord::Base.transaction do
+    statements.each do |statement|
+      connection.execute(statement)
+    end
+  end
+end
