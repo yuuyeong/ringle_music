@@ -7,8 +7,9 @@ Rails.application.routes.draw do
               }
   
   namespace :api do
-    resources :groups, only: :create
-    resources :group_memberships, only: :create
+    resources :groups, only: :create do
+      resources :group_memberships, only: :create
+    end
   
     get '/search', to: 'search#index'
     post '/playlists', to: 'playlists#create'
